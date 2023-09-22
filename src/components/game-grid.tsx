@@ -13,7 +13,7 @@ export function GameGrid() {
           sm: 1,
           md: 2,
           lg: 3,
-          xl: 5,
+          xl: 4,
         }}
         padding="10px"
         spacing={10}
