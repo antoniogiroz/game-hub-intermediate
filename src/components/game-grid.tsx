@@ -22,7 +22,7 @@ export function GameGrid({ filter }: Props) {
           lg: 3,
           xl: 4,
         }}
-        spacing={3}
+        spacing={6}
       >
         {isLoading && skeletons.map((i) => <GameCardSkeleton key={i} />)}
         {!isLoading &&
