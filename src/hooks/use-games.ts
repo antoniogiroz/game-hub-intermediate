@@ -10,15 +10,20 @@ export interface Game {
   metacritic: number;
 }
 
-export function useGames(genre?: Genre, platform?: Platform) {
+export interface GameFilter {
+  genre?: Genre;
+  platform?: Platform;
+}
+
+export function useGames(filter: GameFilter = {}) {
   return useData<Game>(
     "/games",
     {
       params: {
-        genres: genre?.id,
-        platforms: platform?.id,
+        genres: filter.genre?.id,
+        platforms: filter.platform?.id,
       },
     },
-    [genre?.id, platform?.id]
+    [filter]
   );
 }

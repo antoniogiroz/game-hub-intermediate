@@ -1,17 +1,13 @@
 import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
-import { NavBar } from "./components/nav-bar";
+import { useState } from "react";
 import { GameGrid } from "./components/game-grid";
 import { GenreList } from "./components/genre-list";
-import { useState } from "react";
-import { Genre } from "./hooks/use-genres";
+import { NavBar } from "./components/nav-bar";
 import { PlatformSelector } from "./components/platform-selector";
-import { Platform } from "./hooks/use-platforms";
+import { GameFilter } from "./hooks/use-games";
 
 export default function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genre | undefined>();
-  const [selectedPlatform, setSelectedPlatform] = useState<
-    Platform | undefined
-  >();
+  const [filter, setFilter] = useState<GameFilter>({});
 
   return (
     <>
@@ -32,8 +28,8 @@ export default function App() {
         <Show above="lg">
           <GridItem area="aside" padding="10px">
             <GenreList
-              selectedGenre={selectedGenre}
-              onSelect={setSelectedGenre}
+              selectedGenre={filter.genre}
+              onSelect={(genre) => setFilter({ ...filter, genre })}
             />
           </GridItem>
         </Show>
@@ -41,11 +37,11 @@ export default function App() {
         <GridItem area="main" padding="10px">
           <HStack marginBottom={4}>
             <PlatformSelector
-              selectedPlatform={selectedPlatform}
-              onSelect={setSelectedPlatform}
+              selectedPlatform={filter.platform}
+              onSelect={(platform) => setFilter({ ...filter, platform })}
             />
           </HStack>
-          <GameGrid genre={selectedGenre} platform={selectedPlatform} />
+          <GameGrid filter={filter} />
         </GridItem>
       </Grid>
     </>
