@@ -21,7 +21,7 @@ export default function App() {
         </GridItem>
 
         <Show above="lg">
-          <GridItem area="aside" paddingX={5}>
+          <GridItem area="aside" padding="10px">
             <GenreList />
           </GridItem>
         </Show>
