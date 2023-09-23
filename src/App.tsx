@@ -26,7 +26,10 @@ export default function App() {
 
         <Show above="lg">
           <GridItem area="aside" padding="10px">
-            <GenreList onSelect={setSelectedGenre} />
+            <GenreList
+              selectedGenre={selectedGenre}
+              onSelect={setSelectedGenre}
+            />
           </GridItem>
         </Show>
 
