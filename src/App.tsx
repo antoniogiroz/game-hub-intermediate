@@ -1,4 +1,4 @@
-import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
+import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import { useState } from "react";
 import { GameGrid } from "./components/game-grid";
 import { GenreList } from "./components/genre-list";
@@ -6,6 +6,7 @@ import { NavBar } from "./components/nav-bar";
 import { PlatformSelector } from "./components/platform-selector";
 import { GameFilter } from "./hooks/use-games";
 import { SortSelector } from "./components/sort-selector";
+import { GameHeading } from "./components/game-heading";
 
 export default function App() {
   const [filter, setFilter] = useState<GameFilter>({});
@@ -38,6 +39,10 @@ export default function App() {
         </Show>
 
         <GridItem area="main" padding="10px">
+          <Box marginBottom={4}>
+            <GameHeading filter={filter} />
+          </Box>
+
           <HStack marginBottom={4} spacing={4}>
             <PlatformSelector
               selectedPlatform={filter.platform}
