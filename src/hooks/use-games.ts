@@ -11,6 +11,7 @@ export interface Game {
 }
 
 export interface GameFilter {
+  searchText?: string;
   genre?: Genre;
   platform?: Platform;
   sortOrder?: string;
@@ -24,6 +25,7 @@ export function useGames(filter: GameFilter = {}) {
         genres: filter.genre?.id,
         platforms: filter.platform?.id,
         ordering: filter.sortOrder,
+        search: filter.searchText,
       },
     },
     [filter]

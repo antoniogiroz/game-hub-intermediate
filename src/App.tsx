@@ -23,7 +23,9 @@ export default function App() {
         }}
       >
         <GridItem area="nav">
-          <NavBar />
+          <NavBar
+            onSearch={(searchText) => setFilter({ ...filter, searchText })}
+          />
         </GridItem>
 
         <Show above="lg">
