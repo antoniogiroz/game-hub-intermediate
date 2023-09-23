@@ -11,23 +11,20 @@ export function GameGrid({ filter }: Props) {
   const { data, error, isLoading } = useGames(filter);
   const skeletons = Array.from({ length: 6 }, (_, i) => i);
 
-  return (
-    <>
-      {error && <Text>{error}</Text>}
+  if (error) return <Text>{error}</Text>;
 
-      <SimpleGrid
-        columns={{
-          sm: 1,
-          md: 2,
-          lg: 3,
-          xl: 4,
-        }}
-        spacing={6}
-      >
-        {isLoading && skeletons.map((i) => <GameCardSkeleton key={i} />)}
-        {!isLoading &&
-          data.map((game) => <GameCard key={game.id} game={game} />)}
-      </SimpleGrid>
-    </>
+  return (
+    <SimpleGrid
+      columns={{
+        sm: 1,
+        md: 2,
+        lg: 3,
+        xl: 4,
+      }}
+      spacing={6}
+    >
+      {isLoading && skeletons.map((i) => <GameCardSkeleton key={i} />)}
+      {!isLoading && data.map((game) => <GameCard key={game.id} game={game} />)}
+    </SimpleGrid>
   );
 }
