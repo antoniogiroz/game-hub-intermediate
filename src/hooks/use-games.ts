@@ -1,6 +1,7 @@
-import { useData } from "./use-data";
+import { useQuery } from "@tanstack/react-query";
 import { Genre } from "./use-genres";
 import { Platform } from "./use-platforms";
+import apiClient, { FetchResponse } from "../services/api-client";
 
 export interface Game {
   id: string;
@@ -19,16 +20,20 @@ export interface GameFilter {
 }
 
 export function useGames(filter: GameFilter = {}) {
-  return useData<Game>(
-    "/games",
-    {
-      params: {
-        genres: filter.genre?.id,
-        platforms: filter.platform?.id,
-        ordering: filter.sortOrder,
-        search: filter.searchText,
-      },
-    },
-    [filter]
-  );
+  const params = {
+    genres: filter.genre?.id,
+    parent_platforms: filter.platform?.id,
+    ordering: filter.sortOrder,
+    search: filter.searchText,
+  };
+
+  return useQuery<Game[], Error>({
+    queryKey: ["games", params],
+    queryFn: () =>
+      apiClient
+        .get<FetchResponse<Game>>("/games", {
+          params,
+        })
+        .then((response) => response.data.results),
+  });
 }

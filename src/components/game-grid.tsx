@@ -11,7 +11,7 @@ export function GameGrid({ filter }: Props) {
   const { data, error, isLoading } = useGames(filter);
   const skeletons = Array.from({ length: 6 }, (_, i) => i);
 
-  if (error) return <Text>{error}</Text>;
+  if (error) return <Text>{error.message}</Text>;
 
   return (
     <SimpleGrid
@@ -24,7 +24,8 @@ export function GameGrid({ filter }: Props) {
       spacing={6}
     >
       {isLoading && skeletons.map((i) => <GameCardSkeleton key={i} />)}
-      {!isLoading && data.map((game) => <GameCard key={game.id} game={game} />)}
+      {!isLoading &&
+        data?.map((game) => <GameCard key={game.id} game={game} />)}
     </SimpleGrid>
   );
 }
