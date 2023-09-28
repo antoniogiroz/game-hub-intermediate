@@ -32,8 +32,8 @@ export default function App() {
         <Show above="lg">
           <GridItem area="aside" padding="10px">
             <GenreList
-              selectedGenre={filter.genre}
-              onSelect={(genre) => setFilter({ ...filter, genre })}
+              selectedGenreId={filter.genreId}
+              onSelect={(genre) => setFilter({ ...filter, genreId: genre.id })}
             />
           </GridItem>
         </Show>
@@ -45,8 +45,10 @@ export default function App() {
 
           <HStack marginBottom={4} spacing={4}>
             <PlatformSelector
-              selectedPlatform={filter.platform}
-              onSelect={(platform) => setFilter({ ...filter, platform })}
+              selectedPlatformId={filter.platformId}
+              onSelect={(platform) =>
+                setFilter({ ...filter, platformId: platform.id })
+              }
             />
             <SortSelector
               selectedSortOrder={filter.sortOrder}
