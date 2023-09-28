@@ -19,7 +19,6 @@ export interface GameFilter {
   genre?: Genre;
   platform?: Platform;
   sortOrder?: string;
-  page?: number;
 }
 
 export function useGames(filter: GameFilter = {}) {
@@ -42,5 +41,6 @@ export function useGames(filter: GameFilter = {}) {
     getNextPageParam: (lastPage, pages) => {
       return lastPage.next ? pages.length + 1 : undefined;
     },
+    staleTime: 1000 * 60 * 60 * 24,
   });
 }
