@@ -30,7 +30,7 @@ export function GenreList({ selectedGenre, onSelect }: Props) {
       <List>
         {isLoading && <li>Loading...</li>}
 
-        {data?.map((genre) => (
+        {data?.results.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
             <HStack>
               <Image
