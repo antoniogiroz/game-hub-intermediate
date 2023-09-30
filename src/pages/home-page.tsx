@@ -14,11 +14,11 @@ export function HomePage() {
       }}
       templateColumns={{
         base: "1fr",
-        lg: "200px 1fr",
+        lg: "250px 1fr",
       }}
     >
       <Show above="lg">
-        <GridItem area="aside" paddingY="10px">
+        <GridItem area="aside" paddingX={5}>
           <GenreList />
         </GridItem>
       </Show>
@@ -26,7 +26,7 @@ export function HomePage() {
       <GridItem area="main">
         <Box paddingLeft={2}>
           <GameHeading />
-          <Flex marginBottom={5}>
+          <Flex marginBottom={5} marginTop={5}>
             <Box marginRight={5}>
               <PlatformSelector />
             </Box>
