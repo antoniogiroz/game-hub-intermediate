@@ -3,7 +3,7 @@ import { Platform } from "./platform";
 import { Publisher } from "./publisher";
 
 export interface Game {
-  id: string;
+  id: number;
   slug: string;
   name: string;
   genres: Genre[];
