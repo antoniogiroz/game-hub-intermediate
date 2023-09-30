@@ -1,12 +1,11 @@
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { FormEvent, useRef } from "react";
 import { BsSearch } from "react-icons/bs";
+import useGameFilterStore from "../store/game.store";
 
-interface Props {
-  onSearch: (searchText: string) => void;
-}
+export function SearchInput() {
+  const setSearchText = useGameFilterStore((s) => s.setSearchText);
 
-export function SearchInput({ onSearch }: Props) {
   const ref = useRef<HTMLInputElement>(null);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -14,7 +13,7 @@ export function SearchInput({ onSearch }: Props) {
 
     if (!ref.current) return;
 
-    onSearch(ref.current.value);
+    setSearchText(ref.current.value);
   }
 
   return (

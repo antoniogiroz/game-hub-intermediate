@@ -1,17 +1,12 @@
 import { SimpleGrid, Spinner, Text } from "@chakra-ui/react";
-import { GameFilter, useGames } from "../hooks/use-games";
+import { useGames } from "../hooks/use-games";
 import { GameCard } from "./game-card";
 import { GameCardSkeleton } from "./game-card-skeleton";
 import { Fragment } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-interface Props {
-  filter?: GameFilter;
-}
-
-export function GameGrid({ filter }: Props) {
-  const { data, error, isLoading, fetchNextPage, hasNextPage } =
-    useGames(filter);
+export function GameGrid() {
+  const { data, error, isLoading, fetchNextPage, hasNextPage } = useGames();
   const skeletons = Array.from({ length: 6 }, (_, i) => i);
 
   if (error) return <Text>{error.message}</Text>;

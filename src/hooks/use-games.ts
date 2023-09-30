@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Platform } from "./use-platforms";
 import { ApiClient, FetchResponse } from "../services/api-client";
+import useGameFilterStore from "../store/game.store";
 
 const apiClient = new ApiClient<Game>("/games");
 
@@ -13,23 +14,18 @@ export interface Game {
   rating_top: number;
 }
 
-export interface GameFilter {
-  searchText?: string;
-  genreId?: number;
-  platformId?: number;
-  sortOrder?: string;
-}
+export function useGames() {
+  const gameFilter = useGameFilterStore((s) => s.gameFilter);
 
-export function useGames(filter: GameFilter = {}) {
   return useInfiniteQuery<FetchResponse<Game>, Error>({
-    queryKey: ["games", filter],
+    queryKey: ["games", gameFilter],
     queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
         params: {
-          genres: filter.genreId,
-          parent_platforms: filter.platformId,
-          ordering: filter.sortOrder,
-          search: filter.searchText,
+          genres: gameFilter.genreId,
+          parent_platforms: gameFilter.platformId,
+          ordering: gameFilter.sortOrder,
+          search: gameFilter.searchText,
           page: pageParam,
         },
       }),

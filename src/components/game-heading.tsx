@@ -1,15 +1,14 @@
 import { Heading } from "@chakra-ui/react";
-import { GameFilter } from "../hooks/use-games";
 import { useGenre } from "../hooks/use-genre";
 import { usePlatform } from "../hooks/use-platform";
+import useGameFilterStore from "../store/game.store";
 
-interface Props {
-  filter: GameFilter;
-}
+export function GameHeading() {
+  const selectedGenreId = useGameFilterStore((s) => s.gameFilter.genreId);
+  const selectedGenre = useGenre(selectedGenreId);
 
-export function GameHeading({ filter }: Props) {
-  const selectedGenre = useGenre(filter.genreId);
-  const selectedPlatform = usePlatform(filter.platformId);
+  const selectedPlatformId = useGameFilterStore((s) => s.gameFilter.platformId);
+  const selectedPlatform = usePlatform(selectedPlatformId);
 
   const heading = `${selectedPlatform?.name || ""} ${
     selectedGenre?.name || ""
