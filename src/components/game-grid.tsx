@@ -4,6 +4,7 @@ import { GameCard } from "./game-card";
 import { GameCardSkeleton } from "./game-card-skeleton";
 import { Fragment } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { GameCardContainer } from "./game-card-container";
 
 export function GameGrid() {
   const { data, error, isLoading, fetchNextPage, hasNextPage } = useGames();
@@ -29,13 +30,16 @@ export function GameGrid() {
           xl: 4,
         }}
         spacing={6}
+        padding="10px"
       >
         {isLoading && skeletons.map((i) => <GameCardSkeleton key={i} />)}
         {!isLoading &&
           data.pages?.map((page, index) => (
             <Fragment key={index}>
               {page.results?.map((game) => (
-                <GameCard key={game.id} game={game} />
+                <GameCardContainer key={game.id}>
+                  <GameCard game={game} />
+                </GameCardContainer>
               ))}
             </Fragment>
           ))}
