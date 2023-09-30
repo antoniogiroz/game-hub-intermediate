@@ -5,7 +5,7 @@ import { GenreList } from "../components/genre-list";
 import { PlatformSelector } from "../components/platform-selector";
 import { SortSelector } from "../components/sort-selector";
 
-export default function HomePage() {
+export function HomePage() {
   return (
     <Grid
       templateAreas={{
